@@ -1,0 +1,7 @@
+.login_form{
+    width: 50%;
+    height: 350px;
+    border: gray solid 1px;
+    margin: 10% auto;
+    padding-top: 50px;
+}

@@ -1,0 +1,21 @@
+.font22{
+    font-size: 22px;
+    font-weight: 300;
+}
+.font25{
+    font-size: 25px;
+    font-weight: 500;
+}
+.font17{
+    font-size: 17px;
+}
+.border{
+    border: gray solid 1px;
+    width: 35%;
+}
+.bottom_group button{
+    margin-left: auto;
+}
+.gray{
+    color: gray;
+}
