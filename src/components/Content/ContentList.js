@@ -16,13 +16,12 @@ const ContentList = () => {
     const successModalMode = useSelector(state => state.modalModes.editItemSuccess)
     const editItem = useSelector(state => state.modalModes.editItem)
     const showDeleteModal = useSelector(state => state.modalModes.showDeleteModal)
+    const allProductsLoading = useSelector(state => state.content.allProductsLoading)
     const dispatch = useDispatch()
-    const [isLoading, setIsLoading] = useState(true)
     const [deleteItemId, setDeleteItemId] = useState(null)
     
     useEffect(() => {
         dispatch(getProductsThunk())
-        setIsLoading(false)
     }, [])
 
     const handleShow = (id) => {
@@ -35,10 +34,10 @@ const ContentList = () => {
         dispatch(setShowDeleteModal(false))
     }
 
-    if(isLoading){
+    if(allProductsLoading){
         return <Loader message='Data is loading...'/>
     }
-    if(productList.length == 0){
+    if(productList.length == 0 && !allProductsLoading){
         return <h3>No products were found</h3>
     }
     return(

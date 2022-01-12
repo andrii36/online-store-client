@@ -8,14 +8,17 @@ import { useLocation, useNavigate } from "react-router-dom"
 import EditItemModal from './EditItemModal'
 import EditItemSuccessModal from './EditItemSuccessModal'
 import { setEditItem } from '../../redux-store/modal-modes-reducer'
+import Loader from '../Common/Loader'
 
 const ItemDetails = (props) => {
 
     const {title, description, image, price, rating, gender, category, itemsSold, available} = useSelector(state => state.content.currentProduct)
     const role = useSelector(state => state.auth.currentUser.role)
     const code = useSelector(state => state.content.code)
+    const message = useSelector(state => state.content.message)
     const successModalMode = useSelector(state => state.modalModes.editItemSuccess)
     const editItem = useSelector(state => state.modalModes.editItem)
+    const oneProductLoading = useSelector(state => state.content.oneProductLoading)
     const dispatch = useDispatch()
     const location = useLocation()
     const navigate = useNavigate()
@@ -30,6 +33,12 @@ const ItemDetails = (props) => {
         }
     }, [])
 
+    if(oneProductLoading){
+        return <Loader message='Data is loading...'/>
+    }
+    if(code == 1){
+        return <h3>{message}</h3>
+    }
     return(
         <Container style={{padding: '18px'}}>
             <div>
