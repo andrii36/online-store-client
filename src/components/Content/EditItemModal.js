@@ -2,12 +2,12 @@ import { useFormik } from 'formik'
 import { useEffect } from 'react'
 import { Button, CloseButton, Col, Form, Modal, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from 'react-redux'
-import { addProductThunk, getProductByIdThunk, updateProductThunk } from '../../redux-store/content-reducer'
 import * as Yup from 'yup'
 import InputText from '../Common/InputText'
 import InputTextArea from '../Common/InputTextArea'
 import DropdownMenu from '../Common/DropdownMenu'
-import { setEditItem, setEditItemSuccess } from '../../redux-store/modal-modes-reducer'
+import { addProductThunk, getProductByIdThunk, updateProductThunk } from '../../actions/content-actions'
+import { setEditItem, setEditItemSuccess } from '../../actions/modal-modes-actions'
 
 const EditItemModal = ({ productId, addProduct}) => {
 

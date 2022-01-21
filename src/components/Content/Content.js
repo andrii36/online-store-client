@@ -1,13 +1,8 @@
-import { useEffect, useState } from "react"
-import { Container, Row } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import CardItem from "../Card/CardItem"
-import s from './Content.module.css'
+import { Container } from "react-bootstrap"
+import { useSelector } from "react-redux"
 import FilterArea from "./FilterArea"
-import Loader from '../Common/Loader'
-import { deleteProductThunk, getProductsThunk } from "../../redux-store/content-reducer"
-import ContentHeader from "./ContentHeader"
-import ContentList from "./ContentList"
+import ContentHeaderContainer from "./ContentHeaderContainer"
+import ContentListContainer from "./ContentListContainer"
 
 const Content = () => {
 
@@ -16,8 +11,8 @@ const Content = () => {
     return(
         <Container>
             <FilterArea/>
-            <ContentHeader role={userRole}/>
-            <ContentList/>
+            <ContentHeaderContainer role={userRole}/>
+            <ContentListContainer/>
         </Container>
     )
 }

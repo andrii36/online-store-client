@@ -1,9 +1,9 @@
 import { useFormik } from "formik"
 import React from "react"
 import { Col, Form, Row, Button } from "react-bootstrap"
-import { useDispatch, useSelector } from "react-redux"
-import { getFilteredProductsThunk, setFilterConfig } from "../../redux-store/content-reducer"
+import { useDispatch } from "react-redux"
 import * as Yup from 'yup'
+import { getFilteredProductsThunk, setFilterConfig } from "../../actions/content-actions"
 
 const FilterArea = React.memo((props) => {
 

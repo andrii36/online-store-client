@@ -5,18 +5,19 @@ import {
   Routes,
   Route
 } from "react-router-dom";
+import { authmeThunk } from "./actions/auth-actions";
 import './App.css';
 import PageNotFound from "./components/Common/PageNotFound";
 import Content from './components/Content/Content';
 import ItemDetails from "./components/Content/ItemDetails";
+import ItemDetailsContainer from "./components/Content/ItemDetailsContainer";
 import Header from './components/Header/Header';
 import LoginPage from './components/LoginPage/LoginPage';
-import { authmeThunk } from "./redux-store/auth-reducer";
 
-function App() {
-
+const App = () => {
+  
   const dispatch = useDispatch()
-
+  
   useEffect(() => {
     dispatch(authmeThunk())
   }, [])
@@ -27,7 +28,7 @@ function App() {
         <Header/>
         <Routes>
          <Route path='/' element={<Content/>}/>
-         <Route path='item-details/:id' element={<ItemDetails/>}/>
+         <Route path='item-details/:id' element={<ItemDetailsContainer/>}/>
          <Route path='/login' element={<LoginPage/>}/>
          <Route path='*' element={<PageNotFound/>}/>
         </Routes>

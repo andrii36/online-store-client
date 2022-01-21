@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { logoutAC } from '../../redux-store/auth-reducer'
+import { logoutAC } from '../../actions/auth-actions'
 import Logo from '../Common/Logo'
 import s from './Header.module.css'
 

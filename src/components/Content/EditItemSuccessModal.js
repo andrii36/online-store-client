@@ -1,8 +1,8 @@
 import { useEffect } from "react"
 import { Modal, Button } from "react-bootstrap"
 import { useDispatch } from "react-redux"
-import { clearMessageAndCode } from "../../redux-store/content-reducer"
-import { setEditItemSuccess } from "../../redux-store/modal-modes-reducer"
+import { clearMessageAndCode } from "../../actions/content-actions"
+import { setEditItemSuccess } from "../../actions/modal-modes-actions"
 
 const EditItemSuccessModal = ({updated, created}) => {
     const dispatch = useDispatch()

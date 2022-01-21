@@ -12,9 +12,6 @@ export const api = {
     getProductsList: () => {
         return instance.get('/products')
     },
-    // getSearchProducts(value){
-    //     return instance.get('/products/search', {params: {value}})
-    // },
     getSearchProducts(config){
         return instance.post('/products/search', {config})
     },
