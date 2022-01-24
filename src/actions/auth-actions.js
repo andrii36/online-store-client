@@ -1,4 +1,5 @@
 import { api } from "../api/api"
+import { initialize } from "./app-actions"
 
 const authUserSuccessAC = ({id, userName, role}) => ({type: 'AUTH_USER_SUCCESS', id, userName, role})
 const authUserFailAC = (message) => ({type: 'AUTH_USER_FAIL', message})
@@ -23,6 +24,7 @@ export const authmeThunk = () => async (dispatch) => {
         if(response.data.code === 0) {
             dispatch(authUserSuccessAC(response.data.data))
         }
+        dispatch(initialize())
     }catch(e){
         dispatch(authUserFailAC(e.response.data.message))
     }

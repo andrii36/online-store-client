@@ -1,6 +1,5 @@
 const initialState = {
     editItemSuccess: false,
-    editItem: false,
     showDeleteModal: false
 }
 
@@ -10,12 +9,6 @@ const modalModesReducer = (state = initialState, action) => {
             return {
                 ...state,
                 editItemSuccess: action.mode
-            }
-        }
-        case 'SET_EDIT_ITEM': {
-            return {
-                ...state,
-                editItem: action.mode
             }
         }
         case 'SET_SHOW_DELETE_MODAL': {

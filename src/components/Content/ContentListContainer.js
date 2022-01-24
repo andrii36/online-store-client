@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import DeleteProductModal from "./DeleteProductModal"
-import EditItemModal from "./EditItemModal"
+import EditItem from "./EditItem"
 import EditItemSuccessModal from "./EditItemSuccessModal"
 import { deleteProductThunk, getProductsThunk } from "../../actions/content-actions"
 import { setShowDeleteModal } from "../../actions/modal-modes-actions"
@@ -36,7 +36,7 @@ const ContentListContainer = () => {
         <div>
             <ContentList handleShow={handleShow} allProductsLoading={allProductsLoading} productList={productList} userRole={userRole}/>
             {showDeleteModal && <DeleteProductModal handleClose={handleClose} confirmDelete={confirmDelete}/>}
-            {editItem && <EditItemModal addProduct={true}/>}
+            {editItem && <EditItem addProduct={true}/>}
             {code === 0 && successModalMode && <EditItemSuccessModal created="created"/>}
         </div>
     )

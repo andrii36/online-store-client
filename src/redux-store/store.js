@@ -3,8 +3,10 @@ import deviceReducer from "./content-reducer";
 import thunk from 'redux-thunk'
 import authReducer from "./auth-reducer";
 import modalModesReducer from "./modal-modes-reducer";
+import appReducer from "./app-reducer";
 
 const reducers = combineReducers({
+    app: appReducer,
     content: deviceReducer,
     auth: authReducer,
     modalModes: modalModesReducer

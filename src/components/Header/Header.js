@@ -8,7 +8,7 @@ import s from './Header.module.css'
 export default function Header() {
     const dispatch = useDispatch()
     const selector = useSelector((state) => state.auth)
-
+    
     return(
         <header className={s.app_header}>
             <NavLink style={{textDecoration: "none", color: "black"}} to="/"><Logo/></NavLink>
