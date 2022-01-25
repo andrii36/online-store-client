@@ -55,8 +55,11 @@ const EditItem = ({ addProduct }) => {
             dispatch(getProductByIdThunk(productId))
         }
         return () => {
-            dispatch(clearCurrentProductAC())
-            dispatch(clearMessageAndCode())
+            if (!addProduct) {
+                dispatch(clearCurrentProductAC())
+                dispatch(clearMessageAndCode())
+            }
+            
         }
     }, [])
     useEffect(() => {

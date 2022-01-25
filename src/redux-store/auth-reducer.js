@@ -16,9 +16,9 @@ const authReducer = (state = initialState, action) => {
             return {
                 ...state,
                 currentUser: {
-                    id: id,
-                    userName: userName,
-                    role: role
+                    id,
+                    userName,
+                    role
                 },
                 isAuthorised: true,
                 dataIsLoading: false,

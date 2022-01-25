@@ -1,7 +1,7 @@
 import { api } from "../api/api"
 import { initialize } from "./app-actions"
 
-const authUserSuccessAC = ({id, userName, role}) => ({type: 'AUTH_USER_SUCCESS', id, userName, role})
+const authUserSuccessAC = ({userId, userName, role}) => ({type: 'AUTH_USER_SUCCESS', id: userId, userName, role})
 const authUserFailAC = (message) => ({type: 'AUTH_USER_FAIL', message})
 const setDataIsLoadingAC = () => ({type: 'SET_DATA_IS_LOADING'})
 export const logoutAC = () => ({type: 'LOGOUT'})

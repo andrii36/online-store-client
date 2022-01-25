@@ -21,7 +21,7 @@ const ItemDetails = (props) => {
             <Row md={2}>
                 <Col>
                     <div>
-                        <img style={{height: '350px', width: '500px'}} src={image || 'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png'}/>
+                        <img style={{width: '100%'}} src={image || 'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png'}/>
                     </div>
                     <div style={{textAlign: 'left', display: 'flex', justifyContent: 'space-around'}}>
                         <div style={{display: "flex"}}>
