@@ -17,9 +17,8 @@ const LoginPageContainer = () => {
         } 
     }, [selector])
 
-    const onFormSubmit = (e) => {
-        e.preventDefault()
-        dispatch(loginThunk({email: e.target[0].value, password: e.target[1].value}))
+    const onFormSubmit = (data) => {
+        dispatch(loginThunk(data))
     }
     return (
         <div>

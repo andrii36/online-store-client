@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import {
-  BrowserRouter,
   Routes,
   Route
 } from "react-router-dom";
@@ -27,9 +26,9 @@ const App = () => {
   if(!isInitialized){
     return <LoadingModal/>
   }
+  
   return (
     <div className="App">
-      <BrowserRouter>
         <Header/>
         <Routes>
          <Route path='/' element={<Content/>}/>
@@ -39,7 +38,6 @@ const App = () => {
          <Route path='/login' element={<LoginPageContainer/>}/>
          <Route path='*' element={<PageNotFound/>}/>
         </Routes>
-      </BrowserRouter>
     </div>
   );
 }

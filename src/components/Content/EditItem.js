@@ -1,6 +1,6 @@
 import { useFormik } from 'formik'
 import { useEffect } from 'react'
-import { Button, CloseButton, Col, Form, Modal, Row } from "react-bootstrap"
+import { Button, CloseButton, Col, Form, Row } from "react-bootstrap"
 import { useDispatch, useSelector } from 'react-redux'
 import * as Yup from 'yup'
 import InputText from '../Common/InputText'
@@ -8,7 +8,7 @@ import InputTextArea from '../Common/InputTextArea'
 import DropdownMenu from '../Common/DropdownMenu'
 import { addProductThunk, clearCurrentProductAC, clearMessageAndCode, getProductByIdThunk, updateProductThunk } from '../../actions/content-actions'
 import { setEditItemSuccess } from '../../actions/modal-modes-actions'
-import { useLocation, useNavigate } from 'react-router'
+import { Navigate, useLocation, useNavigate } from 'react-router'
 
 const EditItem = ({ addProduct }) => {
 
@@ -25,6 +25,7 @@ const EditItem = ({ addProduct }) => {
     const currentProduct = useSelector(state => state.content.currentProduct)
     const { title, description, price, gender, available, category, itemsSold, rating, image } = currentProduct
     const { message, code } = useSelector(state => state.content)
+    const isAuthorised = useSelector(state => state.auth.isAuthorised)
     const dispatch = useDispatch()
     const productId = location.pathname.split('/')[2]
     
@@ -34,9 +35,9 @@ const EditItem = ({ addProduct }) => {
             description: description || '',
             price: price || '',
             gender: gender || 'Select',
-            available: available || 'Select',
+            available: available || '',
             category: category || 'Select',
-            itemsSold: itemsSold || '',
+            itemsSold: itemsSold || 0,
             rating: rating || '',
             image: image || ''
         },
@@ -46,7 +47,11 @@ const EditItem = ({ addProduct }) => {
             title: Yup.string().max(100, 'Maximum length is 100 symbols').required('Required'),
             description: Yup.string().max(800, 'Maximum length is 800 symbols').required('Required'),
             price: Yup.number().required("Required").positive("Price must be positive number"),
-            rating: Yup.number().typeError("Must be a number").required("Required").equals([1, 2, 3, 4, 5], "Must be from 1 to 5")
+            rating: Yup.number().typeError("Must be a number").required("Required").equals([1, 2, 3, 4, 5], "Must be from 1 to 5"),
+            category: Yup.string().not(['Select'], 'Please choose one option'),
+            gender: Yup.string().not(['Select'], 'Please choose one option'),
+            available: Yup.number().typeError("Must be a number").required("Required"),
+            itemsSold: Yup.number().required("Required")
         })
     })
 
@@ -57,7 +62,7 @@ const EditItem = ({ addProduct }) => {
         return () => {
             if (!addProduct) {
                 dispatch(clearCurrentProductAC())
-                dispatch(clearMessageAndCode())
+                //dispatch(clearMessageAndCode())
             }
             
         }
@@ -93,6 +98,9 @@ const EditItem = ({ addProduct }) => {
         addProduct && navigate(`/`)
     }
 
+    if(!isAuthorised){
+        return <Navigate to='/login'/>
+    }
     if (role !== "admin") {
         return <h1>Please login as admin</h1>
     }
@@ -134,20 +142,24 @@ const EditItem = ({ addProduct }) => {
                                 </div>
                             </Col>
                             <Col style={{ textAlign: "center" }}>
-                                <DropdownMenu itemsArr={["Select", "Yes", "No"]} label="Available:" id="available" title="Yes"
-                                    name="available" value={formik.values.available} onChange={formik.handleChange}
+                                <InputText label="Available:" id="available" title="Yes" placeholder="Total items available in stock"
+                                    name="available" value={formik.values.available} onChange={formik.handleChange} onBlur={formik.handleBlur}
                                 />
+                                <div>{formik.touched.available && formik.errors.available && <p style={{ color: "red" }}>{formik.errors.available}</p>}</div>
                                 <DropdownMenu itemsArr={["Select", "Male", "Female", "Unisex"]} label="Gender:" id="gender" title="Male"
-                                    name="gender" value={formik.values.gender} onChange={formik.handleChange}
+                                    name="gender" value={formik.values.gender} onChange={formik.handleChange} onBlur={formik.handleBlur}
                                 />
+                                <div>{formik.touched.gender && formik.errors.gender && <p style={{ color: "red" }}>{formik.errors.gender}</p>}</div>
                             </Col>
                             <Col style={{ textAlign: "center" }}>
-                                <InputText label="Items sold:" id="itemsSoldInput" placeholder="Number of items sold"
+                                <InputText label="Items sold:" id="itemsSoldInput" placeholder="Number of items sold" onBlur={formik.handleBlur}
                                     name="itemsSold" value={formik.values.itemsSold} onChange={(e) => onChange(e, numberRegexp)}
                                 />
+                                <div>{formik.touched.itemsSold && formik.errors.itemsSold && <p style={{ color: "red" }}>{formik.errors.itemsSold}</p>}</div>
                                 <DropdownMenu itemsArr={["Select", "Cheap", "Super cheap", "Expensive"]} label="Category:" id="category" title="Cheap"
-                                    name="category" value={formik.values.category} onChange={formik.handleChange}
+                                    name="category" value={formik.values.category} onChange={formik.handleChange} onBlur={formik.handleBlur}
                                 />
+                                <div>{formik.touched.category && formik.errors.category && <p style={{ color: "red" }}>{formik.errors.category}</p>}</div>
                             </Col>
                         </Row>
                     </Col>
@@ -170,7 +182,7 @@ const EditItem = ({ addProduct }) => {
                     <div style={{ height: '100px', marginTop: "50px" }}>
                         <Row style={{ width: "50%", margin: "0 auto" }}>
                             <Col>
-                                <Button disabled={Object.keys(formik.errors).length !== 0} style={{ width: "100%" }} variant="outline-success" type="submit">{addProduct ? "Save" : "Update"}</Button>
+                                <Button disabled={(!formik.touched.title && addProduct) || Object.keys(formik.errors).length !== 0} style={{ width: "100%" }} variant="outline-success" type="submit">{addProduct ? "Save" : "Update"}</Button>
                             </Col>
                             <Col>
                                 <Button style={{ width: "100%" }} variant="outline-secondary" onClick={onClose}>Cancel</Button>

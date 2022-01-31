@@ -6,13 +6,13 @@ const ContentHeader = ({role, addProductClick, searchClick}) => {
     const [searchValue, setSearchValue] = useState('')
 
     return(
-        <Row style={{display: "flex", justifyContent: "space-between"}}> 
+        <Row style={{display: "flex", justifyContent: "space-between", width: '100%'}}> 
             <Col>
                 {role === "admin"
                 &&<Button style={{width: "60%"}} variant="outline-primary" onClick={addProductClick}>Add product</Button>}
             </Col>
             <Col>
-                <InputGroup className="mb-3" style={{width: "75%", marginLeft: "auto"}}>
+                <InputGroup className="mb-3" style={{width: "60%", marginLeft: "auto"}}>
                     <FormControl
                     value={searchValue}
                     onChange={(e) => {
@@ -22,7 +22,7 @@ const ContentHeader = ({role, addProductClick, searchClick}) => {
                     aria-label="Search"
                     aria-describedby="basic-addon2"
                     />
-                    <Button variant="outline-primary" id="button-addon2" 
+                    <Button variant="outline-primary" id="button-addon2"
                         onClick={() => searchClick(searchValue)}
                     >
                         Search

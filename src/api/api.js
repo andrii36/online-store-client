@@ -9,14 +9,17 @@ const instance = axios.create({
 })
 
 export const api = {
-    getProductsList: () => {
-        return instance.get('/products')
+    getProductsList: (pageNumber) => {
+        return instance.get('/products-by-page', {params: {page: pageNumber}})
     },
-    getSearchProducts(config){
-        return instance.post('/products/search', {config})
+    getProducts: (pageNumber, config) => {
+        return instance.post('/get-products', {config}, {params: {page: pageNumber}})
     },
-    getAdvancedSearchProducts(formArr){
-        return instance.post('/products/filter', {formArr})
+    getSearchProducts(config, pageNumber){
+        return instance.post('/products/search-by-page', {config}, {params: {page: pageNumber}})
+    },
+    getAdvancedSearchProducts(formArr, pageNumber){
+        return instance.post('/products/filter-by-page', {formArr}, {params: {page: pageNumber}})
     },
     getProductDetails: (id) => {
         return instance.get('/products/details', {params: {id}})
@@ -30,6 +33,10 @@ export const api = {
     updateProduct: (formData, id) => {
         return instance.put('/products/update', {formData}, {headers: {authtoken: localStorage.getItem('authtoken')},
             params: {id}})
+    },
+    purchaseProduct: (id) => {
+        return instance.post('/purchase', {}, {params: {id}, 
+            headers: {authtoken: localStorage.getItem('authtoken')}})
     },
     login: ({email, password}) => {
         return instance.post('/login', {email, password})

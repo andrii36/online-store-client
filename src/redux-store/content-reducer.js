@@ -4,8 +4,11 @@ const initialState = {
     message: '',
     code: null,
     filterConfig: {},
+    searchValue: '',
     allProductsLoading: true,
-    oneProductLoading: true
+    oneProductLoading: true,
+    currentPage: 1,
+    totalProductsCount: 0
 }
 
 const deviceReducer = (state = initialState, action) => {
@@ -13,7 +16,8 @@ const deviceReducer = (state = initialState, action) => {
         case 'SET_PRODUCTS': {
             return {
                 ...state,
-                productList: action.products
+                productList: action.products,
+                totalProductsCount: action.totalProductsCount
             }
         }
         case 'SET_CURRENT_PRODUCT': {
@@ -48,6 +52,12 @@ const deviceReducer = (state = initialState, action) => {
                 filterConfig: action.filterConfig
             }
         }
+        case 'SET_SEARCH_VALUE': {
+            return {
+                ...state,
+                searchValue: action.searchValue
+            }
+        }
         case 'SET_ALL_PRODUCTS_LOADING': {
             return {
                 ...state,
@@ -58,6 +68,12 @@ const deviceReducer = (state = initialState, action) => {
             return {
                 ...state,
                 oneProductLoading: action.mode
+            }
+        }
+        case 'SET_CURRENT_PAGE': {
+            return {
+                ...state,
+                currentPage: action.page
             }
         }
     }

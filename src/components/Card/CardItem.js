@@ -1,4 +1,4 @@
-import { Card, Col, Image, Button } from 'react-bootstrap'
+import { Card, Col, Image, Button, Row } from 'react-bootstrap'
 import { FaStar } from 'react-icons/fa'
 import { useNavigate } from 'react-router'
 import s from './Card.module.css'
@@ -8,8 +8,8 @@ const CardItem = (props) => {
   const navigate = useNavigate()
 
     return (
-      <Col>
-        <Card style={{marginTop: '18px'}}>
+      <Row>
+        <Card style={{margin: '9px auto', width: '80%'}}>
           <div style={{cursor: "pointer"}} onClick={() => navigate(`item-details/${props.id}`)}>
             <div>
               <Image height={150} src={props.image || 'https://www.freeiconspng.com/thumbs/no-image-icon/no-image-icon-6.png'} style={{position: "relative"}}/>
@@ -31,7 +31,7 @@ const CardItem = (props) => {
             </div>
           </div>
         </Card>
-      </Col>
+      </Row>
         
     )
 }
