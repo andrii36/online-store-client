@@ -1,29 +1,28 @@
 import { useEffect } from "react"
 import { useDispatch, useSelector } from "react-redux"
 import { useNavigate } from "react-router"
-import { loginThunk } from "../../actions/auth-actions"
+import { loginThunk } from "../../../actions/user-actions"
 import LoginPage from './LoginPage'
-import LoadingModal from "../Common/LoadingModal"
+import LoadingModal from "../../Common/LoadingModal"
 
 const LoginPageContainer = () => {
     const dispatch = useDispatch()
-    const selector = useSelector((state) => state.auth)
-    const isLoading = useSelector(state => state.auth.dataIsLoading)
+    const user = useSelector((state) => state.user)
     const navigate = useNavigate()
 
     useEffect(() => {
-        if(selector.isAuthorised){
-            navigate('/')
+        if(user.isAuthorised){
+            navigate('/dashboard')
         } 
-    }, [selector])
+    }, [user])
 
     const onFormSubmit = (data) => {
         dispatch(loginThunk(data))
     }
     return (
         <div>
-            <LoginPage onFormSubmit={onFormSubmit} message={selector.message}/>
-            {isLoading && <LoadingModal/>}
+            <LoginPage onFormSubmit={onFormSubmit} message={user.message}/>
+            {user.isLoading && <LoadingModal/>}
         </div>
     )
 }

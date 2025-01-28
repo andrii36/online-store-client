@@ -1,7 +1,7 @@
 import { Button } from 'react-bootstrap'
 import { useDispatch, useSelector } from 'react-redux'
 import { NavLink } from 'react-router-dom'
-import { logoutAC } from '../../actions/auth-actions'
+import { logoutAC } from '../../actions/user-actions'
 import Logo from '../Common/Logo'
 import s from './Header.module.css'
 
@@ -22,7 +22,7 @@ export default function Header() {
             </div>
             : <div className={s.header_auth}>
                 <NavLink to='/login'>Sign in</NavLink>
-                <NavLink to='/registration'>Sign up</NavLink>
+                <NavLink to='/signup'>Sign up</NavLink>
             </div>}
         </header>
     )

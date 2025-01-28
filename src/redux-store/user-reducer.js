@@ -1,25 +1,16 @@
 const initialState = {
-    currentUser: {
-        id: null,
-        userName: null,
-        role: null
-    },
+    currentUser: null,
     isAuthorised: false,
     dataIsLoading: false,
     message: ''
 }
 
-const authReducer = (state = initialState, action) => {
+const userReducer = (state = initialState, action) => {
     switch(action.type){
         case 'AUTH_USER_SUCCESS': {
-            const {id, userName, role} = action
             return {
                 ...state,
-                currentUser: {
-                    id,
-                    userName,
-                    role
-                },
+                currentUser: action.user,
                 isAuthorised: true,
                 dataIsLoading: false,
                 message: ''
@@ -33,14 +24,17 @@ const authReducer = (state = initialState, action) => {
                 dataIsLoading: false,
             }
         }
+        case 'SET_USER_DATA': {
+            return {
+                ...state,
+                currentUser: action.user,
+                dataIsLoading: false,
+            }
+        }
         case 'LOGOUT': {
             return {
                 ...state,
-                currentUser: {
-                    id: null,
-                    userName: null,
-                    role: null
-                },
+                currentUser: null,
                 isAuthorised: false,
                 message: '',
                 dataIsLoading: false
@@ -56,4 +50,4 @@ const authReducer = (state = initialState, action) => {
     return state
 }
 
-export default authReducer
+export default userReducer

@@ -1,0 +1,10 @@
+.flexContainer{
+    justify-content: 'space-between';
+    align-items : 'center';
+}
+.flexRow{
+    flex: 1;
+}
+.pointer{
+    cursor: pointer !important;
+}

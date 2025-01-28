@@ -5,15 +5,18 @@ import App from './App';
 import reportWebVitals from './reportWebVitals';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Provider } from 'react-redux';
-import store from "./redux-store/store";
-import { BrowserRouter } from 'react-router-dom';
+import { store, persistor } from './redux-store/store';
+import { PersistGate } from 'redux-persist/integration/react';
+import { ModalProvider } from './hocs/ModalProvider';
 
 ReactDOM.render(
-    <Provider store={store}>
-      <BrowserRouter>
+  <Provider store={store}>
+    <PersistGate persistor={persistor}>
+      <ModalProvider>
         <App />
-      </BrowserRouter>
-    </Provider>,
+      </ModalProvider>
+    </PersistGate>
+  </Provider>,
   document.getElementById('root')
 );
 

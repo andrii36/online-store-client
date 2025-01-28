@@ -1,0 +1,21 @@
+.signupContainer {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 100vh;
+    background: #f0f2f5;
+    padding: 20px;
+}
+
+.formWrapper {
+    background: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+}
+
+.signupForm {
+    width: 100%;
+}
